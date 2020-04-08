@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MENU printf("\nPress 1 to insert (At End)\nPress 2 to print\nPress any other button to exit\n");
+#define MENU printf("\nPress 1 to insert at head\nPress 2 to insert at end\nPress 3 to print\nPress any other button to exit\n");
 #define CHOICE printf("\nEnter Choice: ");
 #define VALUE printf("\nEnter value: ");
 
@@ -39,6 +39,14 @@ void deallocMem(Node* head, Node *tmp) {
 	deallocMem(tmp->next, (Node*)malloc(sizeof(Node)));
 }
 
+Node* insertAtHead(Node *head, int data) {
+	Node *tmp;
+	tmp = (Node *)malloc(sizeof(Node));
+	tmp->x = data;
+	tmp->next = head;
+	return tmp;
+}
+
 void insertAtEnd(Node *head, int data) {
 	if (head->next == NULL) {
 		head->next = (Node*)malloc(sizeof(Node));
@@ -58,6 +66,7 @@ int main(int argc, char** argv) {
 	getchar();
 	switch (input) {
 		case 1:
+		case 2:
 			VALUE
 			scanf("%d", &x);
 			getchar();
@@ -65,7 +74,7 @@ int main(int argc, char** argv) {
 			head->x = x;
 			head->next = NULL;
 			goto loop;
-		case 2:
+		case 3:
 			printf("List is empty!!!\n");
 			goto label;
 		default:
@@ -81,9 +90,15 @@ int main(int argc, char** argv) {
 			VALUE
 			scanf("%d", &x);
 			getchar();
-			insertAtEnd(head, x);
+			head = insertAtHead(head, x);
 			goto loop;
 		case 2:
+			VALUE
+			scanf("%d", &x);
+			getchar();
+			insertAtEnd(head, x);
+			goto loop;
+		case 3:
 			printf("The list contains: ");
 			printList(head);
 			goto loop;
