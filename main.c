@@ -8,6 +8,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MENU printf("\nPress 1 to insert (At End)\nPress 2 to print\nPress any other button to exit\n");
+#define CHOICE printf("\nEnter Choice: ");
+#define VALUE printf("\nEnter value: ");
+
 struct list{
 	int x;
 	struct list *next;
@@ -35,19 +39,59 @@ void deallocMem(Node* head, Node *tmp) {
 	deallocMem(tmp->next, (Node*)malloc(sizeof(Node)));
 }
 
-int main(int argc, char** argv) {
-	Node *head, *second, *third;
-	head = (Node*)malloc(sizeof(Node));
-	head->x = 10;
-	head->next = (Node*)malloc(sizeof(Node));
-	second = head->next;
-	second->x = 20;
-	second->next = (Node*)malloc(sizeof(Node));
-	third = second->next;
-	third->x = 30;
-	third->next = NULL;
-	printList(head);
-	deallocMem(head, (Node*)malloc(sizeof(Node)));
+void insertAtEnd(Node *head, int data) {
+	if (head->next == NULL) {
+		head->next = (Node*)malloc(sizeof(Node));
+		head->next->x = data;
+		head->next->next = NULL;
+		return;
+	}
+	insertAtEnd(head->next, data);
+}
 
-	return 0;
+int main(int argc, char** argv) {
+	Node *head;
+	int input, x;
+	label: MENU
+	CHOICE
+	scanf("%d", &input);
+	getchar();
+	switch (input) {
+		case 1:
+			VALUE
+			scanf("%d", &x);
+			getchar();
+			head = (Node *)malloc(sizeof(Node));
+			head->x = x;
+			head->next = NULL;
+			goto loop;
+		case 2:
+			printf("List is empty!!!\n");
+			goto label;
+		default:
+			printf("Bye!!!");
+			goto exit;
+	}
+	loop: MENU
+	CHOICE
+	scanf("%d", &input);
+	getchar();
+	switch (input) {
+		case 1:
+			VALUE
+			scanf("%d", &x);
+			getchar();
+			insertAtEnd(head, x);
+			goto loop;
+		case 2:
+			printf("The list contains: ");
+			printList(head);
+			goto loop;
+		default:
+			printf("Bye!!!");
+			deallocMem(head, (Node *)malloc(sizeof(Node)));
+			goto exit;
+	}
+
+	exit: return 0;
 }
