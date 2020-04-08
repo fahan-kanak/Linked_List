@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MENU printf("\nPress 1 to insert at head\nPress 2 to insert at end\nPress 3 to print\nPress any other button to exit\n");
+#define MENU printf("\nPress 1 to insert at head\nPress 2 to insert at middle\nPress 3 to insert at end\nPress 4 to print\nPress any other button to exit\n");
 #define CHOICE printf("\nEnter Choice: ");
 #define VALUE printf("\nEnter value: ");
 
@@ -47,6 +47,18 @@ Node* insertAtHead(Node *head, int data) {
 	return tmp;
 }
 
+void insertAtMiddle(Node *head, int pos, int idx, int data) {
+	if (pos == idx - 1) {
+		Node *tmp;
+		tmp = (Node *)malloc(sizeof(Node));
+		tmp->x = data;
+		tmp->next = head->next;
+		head->next = tmp;
+		return;
+	}
+	insertAtMiddle(head->next, pos + 1, idx, data);
+}
+
 void insertAtEnd(Node *head, int data) {
 	if (head->next == NULL) {
 		head->next = (Node*)malloc(sizeof(Node));
@@ -67,6 +79,7 @@ int main(int argc, char** argv) {
 	switch (input) {
 		case 1:
 		case 2:
+		case 3:
 			VALUE
 			scanf("%d", &x);
 			getchar();
@@ -74,7 +87,7 @@ int main(int argc, char** argv) {
 			head->x = x;
 			head->next = NULL;
 			goto loop;
-		case 3:
+		case 4:
 			printf("List is empty!!!\n");
 			goto label;
 		default:
@@ -93,12 +106,22 @@ int main(int argc, char** argv) {
 			head = insertAtHead(head, x);
 			goto loop;
 		case 2:
+			printf("\nEnter position: ");
+			int index;
+			scanf("%d", &index);
+			getchar();
+			VALUE
+			scanf("%d", &x);
+			getchar();
+			insertAtMiddle(head, 0, index, x);
+			goto loop;
+		case 3:
 			VALUE
 			scanf("%d", &x);
 			getchar();
 			insertAtEnd(head, x);
 			goto loop;
-		case 3:
+		case 4:
 			printf("The list contains: ");
 			printList(head);
 			goto loop;
