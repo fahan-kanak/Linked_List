@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>func.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,7 +13,10 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>delete_functions.c</itemPath>
+      <itemPath>insert_functions.c</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>misc.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -39,7 +43,15 @@
           <standard>10</standard>
         </cTool>
       </compileType>
+      <item path="delete_functions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="func.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="insert_functions.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="misc.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -63,7 +75,15 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="delete_functions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="func.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="insert_functions.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="misc.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
   </confs>

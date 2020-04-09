@@ -7,104 +7,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "func.h"
 
 #define MENU printf("\nPress 1 to insert at head\nPress 2 to insert at middle\nPress 3 to insert at end\nPress 4 to delete the head\nPress 5 to delete at middle\nPress 6 to delete end node\nPress 7 to update\nPress 8 to print\nPress any other button to exit\n");
 #define CHOICE printf("\nEnter Choice: ");
 #define VALUE printf("\nEnter value: ");
-
-struct list{
-	int x;
-	struct list *next;
-};
-
-typedef struct list Node;
-
-void printList(Node *head) {
-	if (head->next == NULL) {
-		printf("%d\n",head->x);
-		return;
-	}
-	printf("%d->",head->x);
-	printList(head->next);
-}
-
-void deallocMem(Node* head, Node *tmp) {
-	tmp->next = head->next;
-	if (head->next == NULL) {
-		free(head);
-		free(tmp);
-		return;
-	}
-	free(head);
-	deallocMem(tmp->next, (Node*)malloc(sizeof(Node)));
-}
-
-Node* insertAtHead(Node *head, int data) {
-	Node *tmp;
-	tmp = (Node *)malloc(sizeof(Node));
-	tmp->x = data;
-	tmp->next = head;
-	return tmp;
-}
-
-void insertAtMiddle(Node *head, int pos, int idx, int data) {
-	if (pos == idx - 1) {
-		Node *tmp;
-		tmp = (Node *)malloc(sizeof(Node));
-		tmp->x = data;
-		tmp->next = head->next;
-		head->next = tmp;
-		return;
-	}
-	insertAtMiddle(head->next, pos + 1, idx, data);
-}
-
-void insertAtEnd(Node *head, int data) {
-	if (head->next == NULL) {
-		head->next = (Node*)malloc(sizeof(Node));
-		head->next->x = data;
-		head->next->next = NULL;
-		return;
-	}
-	insertAtEnd(head->next, data);
-}
-
-void update(Node *head, int position, int index, int data) {
-	if (index == 0) head->x = data;
-	else if (index == -1) {
-		if (head->next == NULL) {
-			head->x = data;
-			return;
-		}
-		update(head->next, position, index, data);
-	} else {
-		if (position == index) {
-			head->x = data;
-			return;
-		}
-		update(head->next, position + 1, index, data);
-	}
-}
-
-void deleteAtMiddle(Node *head, int position, int index) {
-	if (position == index - 1) {
-		Node *tmp;
-		tmp = head->next;
-		head->next = head->next->next;
-		free(tmp);
-		return;
-	}
-	deleteAtMiddle(head->next, position + 1, index);
-}
-
-void deleteEnd(Node *head) {
-	if (head->next->next == NULL) {
-		free(head->next);
-		head->next = NULL;
-		return;
-	}
-	deleteEnd(head->next);
-}
 
 int main(int argc, char** argv) {
 	Node *head;
