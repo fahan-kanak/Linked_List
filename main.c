@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "func.h"
 
-#define MENU printf("\nPress 1 to insert at head\nPress 2 to insert at middle\nPress 3 to insert at end\nPress 4 to delete the head\nPress 5 to delete at middle\nPress 6 to delete end node\nPress 7 to update\nPress 8 to print\nPress any other button to exit\n");
+#define MENU printf("\nPress 1 to insert at head\nPress 2 to insert at middle\nPress 3 to insert at end\nPress 4 to delete the head\nPress 5 to delete at middle\nPress 6 to delete end node\nPress 7 to update\nPress 8 to print\nPress 9 to reverse list\nPress any other button to exit\n");
 #define CHOICE printf("\nEnter Choice: ");
 #define VALUE printf("\nEnter value: ");
 
@@ -36,6 +36,7 @@ int main(int argc, char** argv) {
 		case 6:
 		case 7:
 		case 8:
+		case 9:
 			printf("List is empty!!!\n");
 			goto label;
 		default:
@@ -55,7 +56,7 @@ int main(int argc, char** argv) {
 			goto loop;
 		case 2:
 			if (head->next == NULL) {
-				printf("\nMiddle is undefined right now!!!");
+				printf("\nMiddle is undefined right now!!!\n");
 				goto loop;
 			}
 			printf("\nEnter position: ");
@@ -85,7 +86,7 @@ int main(int argc, char** argv) {
 			goto loop;
 		case 5:
 			if (head->next == NULL) {
-				printf("\nMiddle is undefined right now!!! So, deleting the head!");
+				printf("\nMiddle is undefined right now!!! So, deleting the head!\n");
 				free(head);
 				goto label;
 			}
@@ -110,6 +111,12 @@ int main(int argc, char** argv) {
 		case 8:
 			printf("The list contains: ");
 			printList(head);
+			goto loop;
+		case 9:
+			if (head->next == NULL) goto loop;
+			Node* temp;
+			temp = NULL;
+			head = reverseList(head, head->next, temp);
 			goto loop;
 		default:
 			printf("Bye!!!");
