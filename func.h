@@ -13,3 +13,4 @@ extern void insertAtEnd(Node *head, int data);
 extern void update(Node *head, int position, int index, int data);
 extern void deleteAtMiddle(Node *head, int position, int index);
 extern void deleteEnd(Node *head);
+extern Node* reverseList(Node *first, Node *rest, Node *last);

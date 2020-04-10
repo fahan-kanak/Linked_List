@@ -38,3 +38,16 @@ void update(Node *head, int position, int index, int data) {
 		update(head->next, position + 1, index, data);
 	}
 }
+
+Node* reverseList(Node* first, Node* rest, Node* last) {
+	if (rest->next == NULL) {
+		rest->next = first;
+		last = rest;
+		first->next = NULL;
+		return last;
+	}
+	last = reverseList(first->next, first->next->next, last);
+	rest->next = first;
+	first->next = NULL;
+	return last;
+}
