@@ -5,6 +5,8 @@
  * Created on April 7, 2020, 6:44 AM
  */
 
+//Singly linked list entire project done 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "func.h"
